@@ -35,15 +35,23 @@ window.onload = displayLeaderboard;
 function changeLanguage() {
    const selectedLanguage = document.getElementById('language-select').value;
 
-   // Logic to change language based on selection
    if (selectedLanguage === "he") {
-       document.documentElement.lang = "he";
-       alert("שפה שונתה לעברית");
+       document.getElementById("welcome-message").textContent = "ברוכים הבאים ל-Brain Teasers! תגרמו למוח שלכם לחשוב ותהנו! 😜";
+       document.getElementById("crossword-description").textContent = "Words party! 🎉";
+       document.getElementById("riddles-description").textContent = "Riddi-diculous! 🤪";
+       document.getElementById("connections-description").textContent = "Link fast! ⚡";
+       document.getElementById("trivia-description").textContent = "C = answer? 🤔";
    } else if (selectedLanguage === "ar") {
-       document.documentElement.lang = "ar";
-       alert("تم تغيير اللغة إلى العربية");
+       document.getElementById("welcome-message").textContent = "مرحبًا بكم في Brain Teasers! اجعلوا عقولكم تفكر واستمتعوا!";
+       document.getElementById("crossword-description").textContent = "حفلة الكلمات!";
+       document.getElementById("riddles-description").textContent = "ألغاز رائعة!";
+       document.getElementById("connections-description").textContent = "اربط بسرعة!";
+       document.getElementById("trivia-description").textContent = "C = الجواب؟";
    } else if (selectedLanguage === "ru") {
-       document.documentElement.lang = "ru";
-       alert("Язык изменен на русский");
+       document.getElementById("welcome-message").textContent = "Добро пожаловать в Brain Teasers! Заставьте свой мозг работать и получайте удовольствие!";
+       document.getElementById("crossword-description").textContent = "Словесная вечеринка!";
+       document.getElementById("riddles-description").textContent = "Загадки!";
+       document.getElementById("connections-description").textContent = "Свяжитесь быстро!";
+       document.getElementById("trivia-description").textContent = "C = ответ?";
    }
 }
