@@ -17,10 +17,10 @@ body {
     text-align: center;
 }
 
-/* Tiles (2x2 Grid) */
+/* Tiles */
 .tile-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2x2 Grid */
     gap: 20px;
 }
 
@@ -38,32 +38,39 @@ button {
     background-color: #ff69b4; /* Pink buttons */
     color: white;
     border: none;
-    padding: 10px;
 }
 
 button:hover {
     background-color: #ff1493; /* Darker pink on hover */
 }
 
-/* Trust Form */
-.trust-form {
-    margin-top: 20px;
+/* Leaderboards */
+.leaderboard {
+    width: 100%;
 }
 
-.trust-form h3 {
-    color: purple;
-}
-
-/* Podium */
-.podium {
-    margin-top: 20px;
-}
-
-.podium ul {
-    list-style-type: none;
+/* ASCII Animation */
+#ascii-animation {
+  font-size: 16px;
+  text-align: center;
 }
 
 /* Language menu */
 .language-menu {
     position: absolute;
+}
+
+/* Animations */
+@keyframes twirl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(100px); }
+}
+
+#ascii-animation {
+  animation: twirl 2s linear infinite; /* Twirling effect */
 }
