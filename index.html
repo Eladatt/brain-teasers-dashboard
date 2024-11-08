@@ -4,66 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brain Teasers Dashboard</title>
-    <style>
-        body {
-            font-family: "Courier New", Courier, monospace;
-            background-color: #ffffff;
-            color: #000000;
-        }
-
-        /* Terminal-style layout */
-        .container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-            border: 2px solid black;
-        }
-
-        .header {
-            text-align: center;
-        }
-
-        .tile-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .tile {
-            width: 48%;
-            border: 2px dashed black;
-            padding: 10px;
-            margin-bottom: 20px;
-            background-color: #f0f0f0;
-        }
-
-        .leaderboard {
-            width: 100%;
-            border: 2px solid black;
-            margin-bottom: 20px;
-            padding: 10px;
-        }
-
-        .leaderboard h3 {
-            text-align: center;
-        }
-
-        /* Language menu */
-        .language-menu {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .language-menu select {
-            font-size: 14px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        
+        <!-- Header -->
+        <div class="header">
+            <h1>🧠 Brain Teasers Dashboard 💡</h1>
+            <pre>ASCII ART</pre>
+            <p>Welcome to brain-teasers! Twist your mind and tickle your funny bone! 😜</p>
+        </div>
+
         <!-- Attendings Leaderboard -->
         <div class="leaderboard" id="attending-leaderboard">
             <h3>🥇 Podium (Attendings)</h3>
@@ -72,7 +24,6 @@
 
         <!-- Tiles -->
         <div class="tile-container">
-            
             <!-- Crossword Tile -->
             <div class="tile">
                 <h4>🧩 Crossword</h4>
@@ -117,7 +68,7 @@
 
     <!-- Language Selection Menu -->
     <div class="language-menu">
-        <label for="language-select">🌐 Language:</label>
+        🌐 Language:
         <select id="language-select" onchange="changeLanguage()">
             <option value="he" selected>עברית (Hebrew)</option>
             <option value="ar">العربية (Arabic)</option>
@@ -126,59 +77,7 @@
     </div>
 
     <!-- JavaScript -->
-    <script>
-
-        // Sample data for leaderboard
-        const attendingScores = [
-          { name: 'Dr. Smith', points: 120 },
-          { name: 'Dr. Adams', points: 100 },
-          { name: 'Dr. Lee', points: 90 }
-        ];
-
-        const studentScores = [
-          { name: 'John Doe', points: 80 },
-          { name: 'Jane Roe', points: 70 },
-          { name: 'Sam Roe', points: 60 }
-        ];
-
-        // Function to display leaderboard
-        function displayLeaderboard() {
-          const attendingList = document.getElementById('attending-scores');
-          attendingScores.forEach((entry) => {
-              const li = document.createElement('li');
-              li.textContent = `${entry.name} - ${entry.points} Points`;
-              attendingList.appendChild(li);
-          });
-
-          const studentList = document.getElementById('student-scores');
-          studentScores.forEach((entry) => {
-              const li = document.createElement('li');
-              li.textContent = `${entry.name} - ${entry.points} Points`;
-              studentList.appendChild(li);
-          });
-        }
-
-        // Call function to display leaderboard on page load
-        window.onload = displayLeaderboard;
-
-         // Function to change language
-         function changeLanguage() {
-             const selectedLanguage = document.getElementById('language-select').value;
-
-             // Logic to change language based on selection
-             if (selectedLanguage === "he") {
-                 document.documentElement.lang = "he";
-                 alert("שפה שונתה לעברית");
-             } else if (selectedLanguage === "ar") {
-                 document.documentElement.lang = "ar";
-                 alert("تم تغيير اللغة إلى العربية");
-             } else if (selectedLanguage === "ru") {
-                 document.documentElement.lang = "ru";
-                 alert("Язык изменен на русский");
-             }
-         }
-         
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>
