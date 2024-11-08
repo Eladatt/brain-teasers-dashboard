@@ -1,35 +1,51 @@
 // Sample data for leaderboard
-const attendingScores = [
+let attendingScores = [
   { name: 'Dr. Smith', points: 120 },
   { name: 'Dr. Adams', points: 100 },
   { name: 'Dr. Lee', points: 90 }
 ];
 
-const studentScores = [
-  { name: 'John Doe', points: 80 },
-  { name: 'Jane Roe', points: 70 },
-  { name: 'Sam Roe', points: 60 }
-];
+// Function to submit trust form
+function submitTrustForm(event) {
+  event.preventDefault();
+  
+  const attendingName = document.getElementById('attending-name').value;
+  const riddlesSolved = parseInt(document.getElementById('riddles-solved').value);
 
-// Function to display leaderboard
-function displayLeaderboard() {
-  const attendingList = document.getElementById('attending-scores');
-  attendingScores.forEach((entry) => {
-      const li = document.createElement('li');
-      li.textContent = `${entry.name} - ${entry.points} Points`;
-      attendingList.appendChild(li);
-  });
+  // Check if attending already exists in leaderboard
+  let found = false;
+  for (let i = 0; i < attendingScores.length; i++) {
+      if (attendingScores[i].name === attendingName) {
+          attendingScores[i].points += riddlesSolved * 10; // Add points based on riddles solved
+          found = true;
+          break;
+      }
+  }
 
-  const studentList = document.getElementById('student-scores');
-  studentScores.forEach((entry) => {
-      const li = document.createElement('li');
-      li.textContent = `${entry.name} - ${entry.points} Points`;
-      studentList.appendChild(li);
-  });
+  // If attending not found, add new entry
+  if (!found) {
+      attendingScores.push({ name: attendingName, points: riddlesSolved * 10 });
+  }
+
+  // Update podium
+  updatePodium();
 }
 
-// Call function to display leaderboard on page load
-window.onload = displayLeaderboard;
+// Function to update podium
+function updatePodium() {
+  // Sort attendings by points
+  attendingScores.sort((a, b) => b.points - a.points);
+
+  // Display top three attendings
+  const podiumList = document.getElementById('podium-list');
+  podiumList.innerHTML = ''; // Clear previous podium
+
+  for (let i = 0; i < Math.min(3, attendingScores.length); i++) {
+      const li = document.createElement('li');
+      li.textContent = `${i + 1}. ${attendingScores[i].name} - ${attendingScores[i].points} Points`;
+      podiumList.appendChild(li);
+  }
+}
 
 // Function to change language
 function changeLanguage() {
@@ -37,21 +53,15 @@ function changeLanguage() {
 
    if (selectedLanguage === "he") {
        document.getElementById("welcome-message").textContent = "ברוכים הבאים ל-Brain Teasers! תגרמו למוח שלכם לחשוב ותהנו! 😜";
-       document.getElementById("crossword-description").textContent = "Words party! 🎉";
-       document.getElementById("riddles-description").textContent = "Riddi-diculous! 🤪";
-       document.getElementById("connections-description").textContent = "Link fast! ⚡";
-       document.getElementById("trivia-description").textContent = "C = answer? 🤔";
+       document.getElementById("trust-system-explanation").textContent = "במערכת הנאמנות שלנו, תוכלו להעניק נקודות לרופאים בכירים לפי מספר החידות שפתרתם יחד!";
    } else if (selectedLanguage === "ar") {
        document.getElementById("welcome-message").textContent = "مرحبًا بكم في Brain Teasers! اجعلوا عقولكم تفكر واستمتعوا!";
-       document.getElementById("crossword-description").textContent = "حفلة الكلمات!";
-       document.getElementById("riddles-description").textContent = "ألغاز رائعة!";
-       document.getElementById("connections-description").textContent = "اربط بسرعة!";
-       document.getElementById("trivia-description").textContent = "C = الجواب؟";
+       document.getElementById("trust-system-explanation").textContent = "في نظام الثقة لدينا، يمكنك منح النقاط للأطباء بناءً على عدد الألغاز التي تم حلها معًا!";
    } else if (selectedLanguage === "ru") {
        document.getElementById("welcome-message").textContent = "Добро пожаловать в Brain Teasers! Заставьте свой мозг работать и получайте удовольствие!";
-       document.getElementById("crossword-description").textContent = "Словесная вечеринка!";
-       document.getElementById("riddles-description").textContent = "Загадки!";
-       document.getElementById("connections-description").textContent = "Свяжитесь быстро!";
-       document.getElementById("trivia-description").textContent = "C = ответ?";
+       document.getElementById("trust-system-explanation").textContent = "В нашей системе доверия вы можете давать очки врачам в зависимости от того, сколько загадок вы решили вместе!";
    }
 }
+
+// Initialize podium on page load
+window.onload = updatePodium;
