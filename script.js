@@ -5,47 +5,49 @@ let attendingScores = [
   { name: 'Dr. Lee', points: 90 }
 ];
 
-// Function to submit trust form
-function submitTrustForm(event) {
-  event.preventDefault();
+// Function to display leaderboard
+function displayLeaderboard() {
+  const attendingList = document.getElementById('attending-scores');
   
-  const attendingName = document.getElementById('attending-name').value;
-  const riddlesSolved = parseInt(document.getElementById('riddles-solved').value);
+  // Clear previous list
+  attendingList.innerHTML = '';
 
-  // Check if attending already exists in leaderboard
-  let found = false;
-  for (let i = 0; i < attendingScores.length; i++) {
-      if (attendingScores[i].name === attendingName) {
-          attendingScores[i].points += riddlesSolved * 10; // Add points based on riddles solved
-          found = true;
-          break;
-      }
-  }
-
-  // If attending not found, add new entry
-  if (!found) {
-      attendingScores.push({ name: attendingName, points: riddlesSolved * 10 });
-  }
-
-  // Update podium
-  updatePodium();
-}
-
-// Function to update podium
-function updatePodium() {
-  // Sort attendings by points
+  // Sort by points in descending order
   attendingScores.sort((a, b) => b.points - a.points);
 
   // Display top three attendings
-  const podiumList = document.getElementById('podium-list');
-  podiumList.innerHTML = ''; // Clear previous podium
-
-  for (let i = 0; i < Math.min(3, attendingScores.length); i++) {
+  attendingScores.slice(0,3).forEach((entry) => {
       const li = document.createElement('li');
-      li.textContent = `${i + 1}. ${attendingScores[i].name} - ${attendingScores[i].points} Points`;
-      podiumList.appendChild(li);
-  }
+      li.textContent = `${entry.name} - ${entry.points} Points`;
+      attendingList.appendChild(li);
+  });
 }
+
+// Call function to display leaderboard on page load
+window.onload = displayLeaderboard;
+
+// Function to handle trust-based scoring form submission
+document.getElementById('trust-form').addEventListener('submit', function(event) {
+   event.preventDefault();
+
+   const attendingName = document.getElementById('attending-name').value.trim();
+   const riddlesSolved = parseInt(document.getElementById('riddles-solved').value);
+
+   // Find or create entry for this attending
+   let attending = attendingScores.find(a => a.name === attendingName);
+   if (!attending) {
+       attending = { name: attendingName, points: riddlesSolved };
+       attendingScores.push(attending);
+   } else {
+       attending.points += riddlesSolved;
+   }
+
+   // Update leaderboard
+   displayLeaderboard();
+
+   // Reset form
+   document.getElementById('trust-form').reset();
+});
 
 // Function to change language
 function changeLanguage() {
@@ -53,15 +55,12 @@ function changeLanguage() {
 
    if (selectedLanguage === "he") {
        document.getElementById("welcome-message").textContent = "ברוכים הבאים ל-Brain Teasers! תגרמו למוח שלכם לחשוב ותהנו! 😜";
-       document.getElementById("trust-system-explanation").textContent = "במערכת הנאמנות שלנו, תוכלו להעניק נקודות לרופאים בכירים לפי מספר החידות שפתרתם יחד!";
+       document.getElementById("trust-explanation").textContent = "ברוכים הבאים למערכת הנאמנות! כאן תוכלו לתת נקודות לרופא שהשתתף אתכם בפתרון חידות.";
    } else if (selectedLanguage === "ar") {
        document.getElementById("welcome-message").textContent = "مرحبًا بكم في Brain Teasers! اجعلوا عقولكم تفكر واستمتعوا!";
-       document.getElementById("trust-system-explanation").textContent = "في نظام الثقة لدينا، يمكنك منح النقاط للأطباء بناءً على عدد الألغاز التي تم حلها معًا!";
+       document.getElementById("trust-explanation").textContent = "مرحبًا بكم في نظام الثقة! هنا يمكنك إعطاء النقاط للطبيب الذي شارك معك في حل الألغاز.";
    } else if (selectedLanguage === "ru") {
        document.getElementById("welcome-message").textContent = "Добро пожаловать в Brain Teasers! Заставьте свой мозг работать и получайте удовольствие!";
-       document.getElementById("trust-system-explanation").textContent = "В нашей системе доверия вы можете давать очки врачам в зависимости от того, сколько загадок вы решили вместе!";
+       document.getElementById("trust-explanation").textContent = "Добро пожаловать в систему доверия! Здесь вы можете дать очки врачу, который участвовал с вами в решении головоломок.";
    }
 }
-
-// Initialize podium on page load
-window.onload = updatePodium;
