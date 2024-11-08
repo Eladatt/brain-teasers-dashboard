@@ -16,13 +16,12 @@
             <p id="welcome-message">ברוכים הבאים ל-Brain Teasers! תגרמו למוח שלכם לחשוב ותהנו! 😜</p>
         </div>
 
-        <!-- Attendings Leaderboard -->
-        <div class="leaderboard" id="attending-leaderboard">
-            <h3>🥇 Podium (Attendings)</h3>
-            <ul id="attending-scores"></ul>
+        <!-- Explanation of Trust System -->
+        <div class="trust-system-explanation">
+            <p id="trust-system-explanation">במערכת הנאמנות שלנו, תוכלו להעניק נקודות לרופאים בכירים לפי מספר החידות שפתרתם יחד!</p>
         </div>
 
-        <!-- Tiles -->
+        <!-- Game Tiles (2x2 Grid) -->
         <div class="tile-container">
             <!-- Crossword Tile -->
             <div class="tile">
@@ -58,10 +57,22 @@
 
         </div>
 
-        <!-- Students Leaderboard -->
-        <div class="leaderboard" id="student-leaderboard">
-            <h3>🏆 Leaderboard (Students)</h3>
-            <ul id="student-scores"></ul>
+        <!-- Trust System Form -->
+        <div class="trust-form">
+            <h3>Give Points to Attendings Based on Trust:</h3>
+            <form id="trust-form" onsubmit="submitTrustForm(event)">
+                Enter Attending Name: 
+                <input type="text" id="attending-name" required><br><br>
+                Number of Riddles Solved Together: 
+                <input type="number" id="riddles-solved" required><br><br>
+                <input type="submit" value="Submit Points">
+            </form>
+        </div>
+
+        <!-- Podium for Top 3 Attendings -->
+        <div class="podium">
+            🏆 Top Attendings:
+            <ul id="podium-list"></ul>
         </div>
 
     </div>
@@ -75,13 +86,6 @@
             <option value="ru">Русский (Russian)</option>
         </select>
     </div>
-
-    <!-- ASCII Creature -->
-    <pre id="ascii-creature"> 
-      /\_/\  
-     ( o.o ) 
-      > ^ <
-    </pre>
 
     <!-- JavaScript -->
     <script src="script.js"></script>
