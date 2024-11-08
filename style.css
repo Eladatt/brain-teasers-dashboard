@@ -1,58 +1,69 @@
-/* General styling */
+/* Body styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
+    font-family: "Courier New", Courier, monospace;
+    background-color: #ffffff;
+    color: #000000;
 }
 
+/* Container */
 .container {
     width: 80%;
     margin: auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
     text-align: center;
 }
 
-h1 {
-    font-size: 24px;
+/* Tiles (2x2 Grid) */
+.tile-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 }
 
-.question {
-    margin-top: 20px;
-}
-
-.answer {
-    display: inline-block;
-    margin-right: 10px;
+.tile {
+    border: 2px dashed #000;
     padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
+    background-color: #f0f0f0; /* Light gray */
 }
 
-.answer.selected {
-    background-color: #add8e6; /* Light blue when selected */
+.tile h4 {
+    color: #ff69b4; /* Pink */
 }
 
 button {
+    background-color: #ff69b4; /* Pink buttons */
+    color: white;
+    border: none;
+    padding: 10px;
+}
+
+button:hover {
+    background-color: #ff1493; /* Darker pink on hover */
+}
+
+/* Trust Form */
+.trust-form {
     margin-top: 20px;
-    padding: 10px 20px;
 }
 
-/* Feedback Section */
-.feedback-cube {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
+.trust-form h3 {
+    color: purple;
 }
 
-.cube-correct {
-    background-color: green; /* Correct answer */
+/* Podium */
+.podium {
+    margin-top: 20px;
 }
 
-.cube-wrong {
-    background-color: red; /* Incorrect answer */
+.podium ul {
+    list-style-type: none;
 }
 
-/* Final Score */
-#final-score {
-    margin-top: 30px;
+/* Language menu */
+.language-menu {
+    position: absolute;
 }
