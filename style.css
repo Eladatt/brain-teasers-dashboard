@@ -15,21 +15,19 @@ h1 {
     font-size: 24px;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;
+.question {
     margin-top: 20px;
 }
 
-.grid-item {
-    background-color: #fff;
-    border: 2px solid #ddd;
-    padding: 20px;
+.answer {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
-.grid-item.selected {
+.answer.selected {
     background-color: #add8e6; /* Light blue when selected */
 }
 
@@ -38,15 +36,7 @@ button {
     padding: 10px 20px;
 }
 
-#feedback {
-    margin-top: 20px;
-}
-
-#final-feedback {
-    margin-top: 30px;
-}
-
-/* Color-coded cubes for feedback */
+/* Feedback Section */
 .feedback-cube {
     display: inline-block;
     width: 20px;
@@ -55,9 +45,14 @@ button {
 }
 
 .cube-correct {
-    background-color: green; /* Correct category */
+    background-color: green; /* Correct answer */
 }
 
 .cube-wrong {
-    background-color: red; /* Wrong category */
+    background-color: red; /* Incorrect answer */
+}
+
+/* Final Score */
+#final-score {
+    margin-top: 30px;
 }
