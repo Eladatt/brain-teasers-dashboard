@@ -16,17 +16,18 @@
             <p id="welcome-message">ברוכים הבאים ל-Brain Teasers! תגרמו למוח שלכם לחשוב ותהנו! 😜</p>
         </div>
 
-        <!-- Explanation of Trust System -->
-        <div class="trust-system-explanation">
-            <p id="trust-system-explanation">במערכת הנאמנות שלנו, תוכלו להעניק נקודות לרופאים בכירים לפי מספר החידות שפתרתם יחד!</p>
+        <!-- Podium for Attendings -->
+        <div class="leaderboard" id="attending-leaderboard">
+            <h3>🥇 Podium (Top Attendings)</h3>
+            <ul id="attending-scores"></ul>
         </div>
 
-        <!-- Game Tiles (2x2 Grid) -->
+        <!-- Tiles in 2x2 Grid -->
         <div class="tile-container">
             <!-- Crossword Tile -->
             <div class="tile">
                 <h4>🧩 Crossword</h4>
-                <p id="crossword-description">Words party! 🎉</p>
+                <p>Words party! 🎉</p>
                 <button onclick="window.open('https://script.google.com/macros/s/AKfycbw5IGnkfVPD7jPyNstUWQ13Rx1F4xZxk7GekGFvIzzYX2PK9sbSZoLCN-B5CIj9p6O_/exec')">Play</button>
                 <p>[ B ] [ C ]</p>
             </div>
@@ -34,7 +35,7 @@
             <!-- Riddles Tile -->
             <div class="tile">
                 <h4>🤔 Riddles</h4>
-                <p id="riddles-description">Riddi-diculous! 🤪</p>
+                <p>Riddi-diculous! 🤪</p>
                 <button onclick="window.open('https://script.google.com/a/macros/infolexy.com/s/AKfycbwJ5c-4W2TodZRHrflcG1ezo_aCTBAPQEzsxKLy4IMnPY7_CZ6CpQcSnSpB-N3M36yT8g/exec')">Play</button>
                 <p>[ > ] [ < ]</p>
             </div>
@@ -42,7 +43,7 @@
             <!-- Connections Tile -->
             <div class="tile">
                 <h4>🔗 Connections</h4>
-                <p id="connections-description">Link fast! ⚡</p>
+                <p>Link fast! ⚡</p>
                 <button onclick="window.open('https://script.google.com/a/macros/infolexy.com/s/AKfycbzaGhq_XCFw-0ofQgVeR55lacFTQJatOXnlMPVbG6XsqxNG0INFZgVzRWl7tS9m9INB/exec')">Play</button>
                 <p>[ O ] [ O ] [ O ]</p>
             </div>
@@ -50,29 +51,28 @@
             <!-- Trivia Tile -->
             <div class="tile">
                 <h4>❓ Trivia</h4>
-                <p id="trivia-description">C = answer? 🤔</p>
+                <p>C = answer? 🤔</p>
                 <button onclick="window.open('https://script.google.com/a/macros/infolexy.com/s/AKfycbxz88ejiJlHENmR_663XJRe9H6N4oBV_TAJk9ile5emR8gMRtFw6Lo5unvOETGzzUZL/exec')">Play</button>
                 <p>[ A ] [ B ] [ C ]</p>
             </div>
 
         </div>
 
-        <!-- Trust System Form -->
-        <div class="trust-form">
-            <h3>Give Points to Attendings Based on Trust:</h3>
-            <form id="trust-form" onsubmit="submitTrustForm(event)">
-                Enter Attending Name: 
-                <input type="text" id="attending-name" required><br><br>
+        <!-- Trust-Based Scoring System -->
+        <div class="scoring-system">
+            <h3>🏆 Trust-Based Scoring System 🏆</h3>
+            <form id="trust-form">
+                Enter Attending's Name: 
+                <input type="text" id="attending-name" required placeholder="Attending Name">
+                
                 Number of Riddles Solved Together: 
-                <input type="number" id="riddles-solved" required><br><br>
-                <input type="submit" value="Submit Points">
-            </form>
-        </div>
+                <input type="number" id="riddles-solved" required min="1">
 
-        <!-- Podium for Top 3 Attendings -->
-        <div class="podium">
-            🏆 Top Attendings:
-            <ul id="podium-list"></ul>
+                <button type="submit">Submit Points</button>
+            </form>
+
+            <!-- Short Explanation of Trust System -->
+            <p id="trust-explanation">ברוכים הבאים למערכת הנאמנות! כאן תוכלו לתת נקודות לרופא שהשתתף אתכם בפתרון חידות.</p>
         </div>
 
     </div>
@@ -86,6 +86,13 @@
             <option value="ru">Русский (Russian)</option>
         </select>
     </div>
+
+    <!-- ASCII Animation -->
+    <pre id="ascii-animation"> 
+      /\_/\  
+     ( o.o ) 
+      > ^ <
+    </pre>
 
     <!-- JavaScript -->
     <script src="script.js"></script>
