@@ -1,102 +1,123 @@
-// Sample words for connections
-const leftWords = ["Apple", "Banana", "Orange", "Grapes"];
-const rightWords = ["Fruit", "Yellow", "Citrus", "Purple"];
+// Words to be used in the puzzle (randomly selected from previous links)
+const words = [
+    "Crossword", "Riddles", "Connections", "Trivia",
+    "Puzzle", "Brain", "Teasers", "Fun",
+    "Challenge", "Logic", "Quiz", "Mind",
+    "Solve", "Think", "Play", "Game"
+];
 
-// Correct connections (indices match correct pairs)
-const correctConnections = [0, 1, 2, 3]; // Apple -> Fruit, Banana -> Yellow, etc.
+// Categories (each category has its own secret color)
+const categories = [
+    { name: 'Games', words: ["Crossword", "Riddles", "Trivia", "Connections"], color: 'green' },
+    { name: 'Brain Activities', words: ["Puzzle", "Brain", "Teasers", "Fun"], color: 'blue' },
+    { name: 'Mental Actions', words: ["Challenge", "Logic", "Quiz", "Mind"], color: 'purple' },
+    { name: 'Verbs', words: ["Solve", "Think", "Play", "Game"], color: 'red' }
+];
 
-// Shuffle arrays using Fisher-Yates algorithm
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-  }
+let selectedTiles = [];
+let attemptsLeft = 4;
+
+// Shuffle words array for randomness
+const shuffledWords = words.sort(() => Math.random() - 0.5);
+
+// Create grid dynamically
+const gridContainer = document.getElementById('grid');
+shuffledWords.forEach((word, index) => {
+   const tile = document.createElement('div');
+   tile.classList.add('grid-item');
+   tile.textContent = word;
+   tile.addEventListener('click', () => selectTile(index));
+   gridContainer.appendChild(tile);
+});
+
+// Select tile function
+function selectTile(index) {
+   const tile = document.querySelectorAll('.grid-item')[index];
+   if (selectedTiles.includes(index)) {
+       // Deselect tile if already selected
+       selectedTiles = selectedTiles.filter(i => i !== index);
+       tile.classList.remove('selected');
+   } else if (selectedTiles.length < 4) {
+       // Select up to 4 tiles
+       selectedTiles.push(index);
+       tile.classList.add('selected');
+   }
 }
 
-// Populate columns with shuffled words
-function populateColumns() {
-  const leftColumn = document.getElementById('left-column');
-  const rightColumn = document.getElementById('right-column');
+// Submit selection function
+function submitSelection() {
+   if (selectedTiles.length !== 4) {
+       alert("Please select exactly 4 tiles.");
+       return;
+   }
 
-  // Shuffle both columns
-  shuffleArray(leftWords);
-  shuffleArray(rightWords);
+   let correctCount = checkSelection();
+   giveFeedback(correctCount);
 
-  // Populate left column
-  leftWords.forEach((word, index) => {
-      const div = document.createElement('div');
-      div.textContent = word;
-      div.classList.add('left-word');
-      div.setAttribute('data-index', index); // Store index for matching
-      div.onclick = () => selectLeftWord(index);
-      leftColumn.appendChild(div);
-  });
+   attemptsLeft--;
+   document.getElementById('attempts-left').textContent = `Attempts Left: ${attemptsLeft}`;
 
-  // Populate right column
-  rightWords.forEach((word, index) => {
-      const div = document.createElement('div');
-      div.textContent = word;
-      div.classList.add('right-word');
-      div.setAttribute('data-index', index); // Store index for matching
-      div.onclick = () => selectRightWord(index);
-      rightColumn.appendChild(div);
-  });
+   if (correctCount === 4 || attemptsLeft === 0) {
+       endGame();
+   }
+
+   // Reset selection after submission
+   selectedTiles.forEach(index => document.querySelectorAll('.grid-item')[index].classList.remove('selected'));
+   selectedTiles = [];
 }
 
-// Variables to track selected words
-let selectedLeftIndex = null;
-let selectedRightIndex = null;
+// Check selection against categories
+function checkSelection() {
+   let correctCount = 0;
 
-// Select a word from left column
-function selectLeftWord(index) {
-  selectedLeftIndex = index;
+   const selectedWords = selectedTiles.map(index => shuffledWords[index]);
+   
+   categories.forEach(category => {
+       const matches = selectedWords.filter(word => category.words.includes(word));
+       if (matches.length > correctCount) correctCount = matches.length; // Track max matches in one category
+   });
+
+   return correctCount; // Return how many are in the same category
 }
 
-// Select a word from right column
-function selectRightWord(index) {
-  selectedRightIndex = index;
+// Provide feedback with colored cubes
+function giveFeedback(correctCount) {
+   const feedbackContainer = document.getElementById('feedback');
+   feedbackContainer.innerHTML = ''; // Clear previous feedback
 
-  if (selectedLeftIndex !== null && selectedRightIndex !== null) {
-      checkConnection();
-      selectedLeftIndex = null; // Reset selections after checking connection
-      selectedRightIndex = null;
-  }
+   for (let i = 0; i < correctCount; i++) {
+       const cube = document.createElement('div');
+       cube.classList.add('feedback-cube', 'cube-correct');
+       feedbackContainer.appendChild(cube);
+   }
+
+   for (let i = correctCount; i < 4; i++) {
+       const cube = document.createElement('div');
+       cube.classList.add('feedback-cube', 'cube-wrong');
+       feedbackContainer.appendChild(cube);
+   }
 }
 
-// Check if connection is correct
-function checkConnection() {
-  const resultDisplay = document.getElementById('result-display');
+// End game function
+function endGame() {
+   const finalFeedbackContainer = document.getElementById('final-feedback');
+   
+   let message = "<h3>Game Over!</h3>";
+   
+   if (attemptsLeft > 0) message += "<p>Congratulations! You found all categories!</p>";
+   else message += "<p>You've used all your attempts.</p>";
 
-  if (correctConnections[selectedLeftIndex] === selectedRightIndex) {
-      resultDisplay.textContent = "Correct Connection!";
-      resultDisplay.style.color = "green";
-  } else {
-      resultDisplay.textContent = "Incorrect Connection!";
-      resultDisplay.style.color = "red";
-  }
+   message += "<h4>Categories and Terms:</h4><ul>";
+
+   categories.forEach(category => {
+      message += `<li><strong>${category.name}</strong>: ${category.words.join(', ')}</li>`;
+      message += `<span style="color:${category.color}">Category Color</span><br>`;
+   });
+
+   message += "</ul>";
+   
+   finalFeedbackContainer.innerHTML = message;
+
+   // Disable further submissions
+   document.getElementById('submit-btn').disabled = true;
 }
-
-// Check all answers at once (for final check button)
-function checkAnswers() {
-  let correctCount = 0;
-
-  // Compare each left word's connection with correct answer
-  leftWords.forEach((word, index) => {
-      if (correctConnections[index] === parseInt(document.querySelector(`.right-word[data-index="${index}"]`).getAttribute("data-index"))) {
-          correctCount++;
-      }
-  });
-
-  const resultDisplay = document.getElementById('result-display');
-  
-  if (correctCount === leftWords.length) {
-      resultDisplay.textContent = "All connections are correct!";
-      resultDisplay.style.color = "green";
-  } else {
-      resultDisplay.textContent = `${correctCount} out of ${leftWords.length} connections are correct.`;
-      resultDisplay.style.color = "orange";
-  }
-}
-
-// Initialize columns on page load
-window.onload = populateColumns;
