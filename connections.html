@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connections Game</title>
+    <title>New York-style Connections</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header -->
-    <div class="header">
-        <h1>🔗 New York-style Connections Game 🗽</h1>
-        <!-- Instructions for the game -->
-        <p id="game-instructions">Connect related items from the left column to the right column by clicking on them.</p>
+    <div class="container">
+        <h1>New York-style Connections</h1>
+        <p>Select 4 tiles that you think belong to the same category and submit your selection.</p>
+
+        <!-- Puzzle Grid -->
+        <div id="grid" class="grid-container"></div>
+
+        <!-- Submit Button -->
+        <button id="submit-btn" onclick="submitSelection()">Submit Selection</button>
+
+        <!-- Feedback Section -->
+        <div id="feedback"></div>
+
+        <!-- Attempts Left -->
+        <p id="attempts-left">Attempts Left: 4</p>
+
+        <!-- Final Feedback -->
+        <div id="final-feedback"></div>
+
     </div>
-
-    <!-- Game Area -->
-    <div class="game-container">
-        <!-- Left Column of Words -->
-        <div class="column" id="left-column"></div>
-
-        <!-- Right Column of Words -->
-        <div class="column" id="right-column"></div>
-    </div>
-
-    <!-- Button to Check Answers -->
-    <button id="check-answers-btn" onclick="checkAnswers()">Check Answers!</button>
-
-    <!-- Result Display Area -->
-    <div id="result-display"></div>
 
     <!-- JavaScript -->
     <script src="script.js"></script>
