@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connections Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>🔗 New York-style Connections Game 🗽</h1>
+        <!-- Instructions for the game -->
+        <p id="game-instructions">Connect related items from the left column to the right column by clicking on them.</p>
+    </div>
+
+    <!-- Game Area -->
+    <div class="game-container">
+        <!-- Left Column of Words -->
+        <div class="column" id="left-column"></div>
+
+        <!-- Right Column of Words -->
+        <div class="column" id="right-column"></div>
+    </div>
+
+    <!-- Button to Check Answers -->
+    <button id="check-answers-btn" onclick="checkAnswers()">Check Answers!</button>
+
+    <!-- Result Display Area -->
+    <div id="result-display"></div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
