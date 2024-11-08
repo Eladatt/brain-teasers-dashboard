@@ -13,7 +13,7 @@
         <div class="header">
             <h1>🧠 Brain Teasers Dashboard 💡</h1>
             <pre>ASCII ART</pre>
-            <p>Welcome to brain-teasers! Twist your mind and tickle your funny bone! 😜</p>
+            <p id="welcome-message">ברוכים הבאים ל-Brain Teasers! תגרמו למוח שלכם לחשוב ותהנו! 😜</p>
         </div>
 
         <!-- Attendings Leaderboard -->
@@ -27,7 +27,7 @@
             <!-- Crossword Tile -->
             <div class="tile">
                 <h4>🧩 Crossword</h4>
-                <p>Words party! 🎉</p>
+                <p id="crossword-description">Words party! 🎉</p>
                 <button onclick="window.open('https://script.google.com/macros/s/AKfycbw5IGnkfVPD7jPyNstUWQ13Rx1F4xZxk7GekGFvIzzYX2PK9sbSZoLCN-B5CIj9p6O_/exec')">Play</button>
                 <p>[ B ] [ C ]</p>
             </div>
@@ -35,7 +35,7 @@
             <!-- Riddles Tile -->
             <div class="tile">
                 <h4>🤔 Riddles</h4>
-                <p>Riddi-diculous! 🤪</p>
+                <p id="riddles-description">Riddi-diculous! 🤪</p>
                 <button onclick="window.open('https://script.google.com/a/macros/infolexy.com/s/AKfycbwJ5c-4W2TodZRHrflcG1ezo_aCTBAPQEzsxKLy4IMnPY7_CZ6CpQcSnSpB-N3M36yT8g/exec')">Play</button>
                 <p>[ > ] [ < ]</p>
             </div>
@@ -43,7 +43,7 @@
             <!-- Connections Tile -->
             <div class="tile">
                 <h4>🔗 Connections</h4>
-                <p>Link fast! ⚡</p>
+                <p id="connections-description">Link fast! ⚡</p>
                 <button onclick="window.open('https://script.google.com/a/macros/infolexy.com/s/AKfycbzaGhq_XCFw-0ofQgVeR55lacFTQJatOXnlMPVbG6XsqxNG0INFZgVzRWl7tS9m9INB/exec')">Play</button>
                 <p>[ O ] [ O ] [ O ]</p>
             </div>
@@ -51,7 +51,7 @@
             <!-- Trivia Tile -->
             <div class="tile">
                 <h4>❓ Trivia</h4>
-                <p>C = answer? 🤔</p>
+                <p id="trivia-description">C = answer? 🤔</p>
                 <button onclick="window.open('https://script.google.com/a/macros/infolexy.com/s/AKfycbxz88ejiJlHENmR_663XJRe9H6N4oBV_TAJk9ile5emR8gMRtFw6Lo5unvOETGzzUZL/exec')">Play</button>
                 <p>[ A ] [ B ] [ C ]</p>
             </div>
@@ -75,6 +75,13 @@
             <option value="ru">Русский (Russian)</option>
         </select>
     </div>
+
+    <!-- ASCII Creature -->
+    <pre id="ascii-creature"> 
+      /\_/\  
+     ( o.o ) 
+      > ^ <
+    </pre>
 
     <!-- JavaScript -->
     <script src="script.js"></script>
