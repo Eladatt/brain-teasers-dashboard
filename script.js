@@ -1,6 +1,6 @@
 // Sample data for leaderboard
 let attendingScores = [
-  { name: 'Dr. 🦄', points: 1 },
+  { name: 'Dr. Eden', points: 4 },
   { name: 'Dr. 🤖', points: 2 },
   { name: 'Dogtor 🐕‍🦺', points: 3 }
 ];
