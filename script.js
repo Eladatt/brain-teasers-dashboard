@@ -1,8 +1,8 @@
 // Sample data for leaderboard
 let attendingScores = [
-  { name: 'Dr. 🦄', points: 0 },
-  { name: 'Dr. 🤖', points: 0 },
-  { name: 'Dogtor 🐕‍🦺', points: 0 }
+  { name: 'Dr. 🦄', points: 1 },
+  { name: 'Dr. 🤖', points: 2 },
+  { name: 'Dogtor 🐕‍🦺', points: 3 }
 ];
 
 // Function to display leaderboard
